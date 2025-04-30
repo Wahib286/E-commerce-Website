@@ -1,10 +1,12 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import CartItem from "../components/CartItem";
 
 const Cart = () => {
-  const cart = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state);
+  console.log("Printing Cart");
+  console.log(cart);
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
@@ -14,45 +16,41 @@ const Cart = () => {
   return (
     <div>
       {cart.length > 0 ? (
-        <div>
-          {/* Cart Items */}
+        <div className="flex max-w-6xl mx-auto h-100vh">
           <div>
-            {cart.map((item, index) => (
-              <CartItem key={item.id} item={item} itemIndex={index} />
-            ))}
+            {cart.map((item, index) => {
+              return <CartItem key={item.id} item={item} itemIndex={index} />;
+            })}
           </div>
 
-          {/* Summary Section */}
-          <div className="pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-            <div className="space-y-2">
-              <h2 className="text-2xl font-bold text-gray-800">Your Cart</h2>
-              <h3 className="text-lg text-gray-600">Summary</h3>
-              <p className="text-gray-700">
-                Total Items:{" "}
-                <span className="font-semibold">{cart.length}</span>
+          <div className="p-6 mx-auto flex flex-col justify-between h-full">
+            {/* Header */}
+            <div className="mb-10">
+              <div className="text-sm text-gray-600 font-semibold uppercase">
+                Your Cart
+              </div>
+              <div className="text-3xl font-bold text-green-700">Summary</div>
+              <p className="mt-2 text-md font-medium text-gray-800">
+                <span>Total Items: {cart.length}</span>
               </p>
             </div>
 
-            <div className="space-y-3">
-              <p className="text-xl font-bold text-green-600">
-                Total Amount: ${totalAmount.toFixed(2)}
+            {/* Footer */}
+            <div className="mt-auto">
+              <p className="text-lg font-semibold text-gray-800 mb-4">
+                Total Amount: <span className="font-bold">${totalAmount}</span>
               </p>
-              <button className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded transition">
-                Check Out Now
+              <button className="w-full bg-green-700 hover:bg-green-800 text-white py-3 rounded-md font-semibold transition-colors">
+                Checkout Now
               </button>
             </div>
           </div>
         </div>
       ) : (
-        // Empty Cart View
-        <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-          <h1 className="text-2xl font-semibold text-gray-700 mb-4">
-            Your cart is empty
-          </h1>
+        <div>
+          <h1>Cart Empty</h1>
           <Link to={"/"}>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition">
-              Shop Now
-            </button>
+            <button>Shop Now</button>
           </Link>
         </div>
       )}

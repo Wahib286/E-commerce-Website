@@ -12,7 +12,7 @@ const CartItem = ({ item, itemIndex }) => {
   };
 
   return (
-    <div className="flex justify-between border-b pb-6 gap-x-4  my-10 max-w-xl">
+    <div className="flex justify-between border-b pb-6 gap-x-4  my-10 max-w-3xl">
       {/* Image */}
       <div className="h-[180px] w-[180px] flex-shrink-0">
         <img
