@@ -5,8 +5,6 @@ import CartItem from "../components/CartItem";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state);
-  console.log("Printing Cart");
-  console.log(cart);
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
@@ -19,7 +17,7 @@ const Cart = () => {
         <div className="flex max-w-6xl mx-auto h-100vh">
           <div>
             {cart.map((item, index) => {
-              return <CartItem key={item.id} item={item} itemIndex={index} />;
+              return <CartItem key={item.id} item={item} />;
             })}
           </div>
 

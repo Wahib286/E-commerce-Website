@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { remove } from "../redux/Slices/CartSlice";
 
-const CartItem = ({ item, itemIndex }) => {
+const CartItem = ({ item}) => {
   const dispatch = useDispatch();
 
   const removeFromCart = () => {
